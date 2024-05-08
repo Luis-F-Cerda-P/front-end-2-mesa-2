@@ -34,22 +34,22 @@ menuItems.forEach(item => {
 // CLASES (clases que ya existen en el style.css)
 //--------------------------------------------------------------
 
-console.log(sitio.classList);
+// console.log(sitio.classList);
 
-console.log(sitio.classList.contains("dark"));
-console.log(sitio.classList);
+// console.log(sitio.classList.contains("dark"));
+// console.log(sitio.classList);
 
-console.log(sitio.classList.add("dark"));
-console.log(sitio.classList);
+// console.log(sitio.classList.add("dark"));
+// console.log(sitio.classList);
 
-console.log(sitio.classList.remove("dark"));
-console.log(sitio.classList);
+// console.log(sitio.classList.remove("dark"));
+// console.log(sitio.classList);
 
-console.log(sitio.classList.remove("dark")); 
-console.log(sitio.classList.toggle("dark"));
-console.log(sitio.classList);
-console.log(sitio.classList.toggle("dark"));
-console.log(sitio.classList);
+// console.log(sitio.classList.remove("dark")); 
+// console.log(sitio.classList.toggle("dark"));
+// console.log(sitio.classList);
+// console.log(sitio.classList.toggle("dark"));
+// console.log(sitio.classList);
 
 
 
@@ -68,6 +68,13 @@ console.log(sitio.classList);
 // De lo contrario, si está en modo claro debe decir "Cambiar a modo oscuro 🌛"
 
 function elegirTema() {
-
+  if (window.confirm("¿Deseas cambiar de tema?")) {
+    sitio.classList.toggle("dark")
+    if (sitio.classList.contains("dark")) {
+      btnTema.innerText = "Cambiar a modo claro 🌞"
+    } else {
+      btnTema.innerText = "Cambiar a modo oscuro 🌛"
+    }
+  } 
 }
-elegirTema();
+// elegirTema();

@@ -89,3 +89,46 @@ for (noticia of articulos) {
 
 
 //👇
+const losElementos = []
+losElementos[0] = document.querySelector("HEAD")
+const losMeta = document.querySelectorAll("META")
+for (let i = 0; i < losMeta.length; i++) {
+    losElementos[i+1] = losMeta[i]
+}
+losElementos[4]= document.querySelector("TITLE")
+losElementos[5]= document.querySelector("LINK")
+losElementos[6]= document.querySelector("SCRIPT")
+losElementos[7]= document.querySelector("STYLE")
+losElementos[8]= document.querySelector("BODY")
+losElementos[9]= document.querySelector("HEADER")
+losElementos[10]= document.querySelector("H1")
+losElementos[11]= document.querySelector("NAV")
+losElementos[12]= document.querySelector("UL")
+losElementos[13]= document.querySelector("LI")
+losElementos[14]= document.querySelector("LI")
+losElementos[15]= document.querySelector("LI")
+losElementos[16]= document.querySelector("DIV")
+losElementos[17]= document.querySelector("BUTTON")
+losElementos[18]= document.querySelector("A")
+losElementos[19]= document.querySelector("MAIN")
+losElementos[20]= document.querySelector("ARTICLE")
+losElementos[21]= document.querySelector("H2")
+losElementos[22]= document.querySelector("IMG")
+losElementos[23]= document.querySelector("P")
+losElementos[24]= document.querySelector("EM")
+losElementos[25]= document.querySelector("ARTICLE")
+losElementos[26]= document.querySelector("H2")
+losElementos[27]= document.querySelector("IMG")
+losElementos[28]= document.querySelector("P")
+losElementos[29]= document.querySelector("ARTICLE")
+losElementos[30]= document.querySelector("H2")
+losElementos[31]= document.querySelector("IMG")
+losElementos[32]= document.querySelector("P")
+losElementos[33]= document.querySelector("FOOTER")
+losElementos[34]= document.querySelector("SCRIPT")
+losElementos[35]= document.querySelector("SCRIPT")
+losElementos[36]= document.querySelector("SCRIPT")
+losElementos[37]= document.querySelector("DIV")
+losElementos[38]= document.querySelector("SECTION")
+
+losElementos.forEach(x => console.log(x))
