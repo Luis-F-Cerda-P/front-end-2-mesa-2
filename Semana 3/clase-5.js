@@ -166,7 +166,7 @@ function mostrarDatosEnPerfil(albumes) {
   const spanAlbumes = document.getElementById("cant-albums");
   spanAlbumes.textContent = stringCantAlbums;
 
-  let nroFavoritos = albumes.reduce((acumulador, elementoActual) => elementoActual.like ? acumulador++ : null, 0)
+  let nroFavoritos = albumes.reduce((acumulador, elementoActual) => elementoActual.like ? acumulador++ : acumulador, 0)
   console.log(nroFavoritos);
   let stringCantFavoritos = nroFavoritos > 1 ? " álbumes" : " álbum";
   stringCantFavoritos = nroFavoritos + stringCantFavoritos;
