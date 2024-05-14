@@ -166,12 +166,12 @@ function mostrarDatosEnPerfil(albumes) {
   const spanAlbumes = document.getElementById("cant-albums");
   spanAlbumes.textContent = stringCantAlbums;
 
-  let nroFavoritos = albumes.reduce((acumulador, elementoActual) => elementoActual.like ? acumulador++ : acumulador, 0)
-  console.log(nroFavoritos);
-  let stringCantFavoritos = nroFavoritos > 1 ? " álbumes" : " álbum";
+  let nroFavoritos = 0;
+  albumes.forEach((elemento) => elemento.like ? nroFavoritos++ : null, 0)
+  let stringCantFavoritos = nroFavoritos > 1 ? " favoritos" : " favorito";
   stringCantFavoritos = nroFavoritos + stringCantFavoritos;
   const spanFavoritos = document.getElementById("cant-favoritos");
-  spanAlbumes.textContent = stringCantAlbums;
+  spanFavoritos.textContent = stringCantFavoritos;
 
     
 }
