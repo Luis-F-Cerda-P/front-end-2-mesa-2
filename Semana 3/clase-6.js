@@ -1,6 +1,10 @@
+import { albumes } from './clase-5.js';
+
+console.log(albumes)
+
 /* -------------------------------------------------------------------------- */
 /*                               WEB REACTIVA                                 */
-/* -------------------------------------------------------------------------- */ 
+/* -------------------------------------------------------------------------- */
 
 // Controlar eventos
 
@@ -34,7 +38,7 @@ function marcarFavorito() {
     console.log(botonesLike);
 
 
-    botonesLike.forEach(function(boton) {
+    botonesLike.forEach(function (boton) {
         boton.addEventListener("click", function (evento) {
 
             console.log(evento);
@@ -44,7 +48,7 @@ function marcarFavorito() {
             // recuperar el id del álbum al cual se marcó como favorito
             let albumId = evento.target.id;
 
-            albumesFamosos.forEach( album => {
+            albumesFamosos.forEach(album => {
                 if (albumId == album.id) {
                     console.log("Coincide " + album.id + " " + album.nombre);
                     console.log(album.like);
@@ -80,12 +84,22 @@ marcarFavorito();
 // 4- Si la búsqueda da un resultado válido, borrar el objeto del array
 // 5- Llamar a las funciones de renderizar y marcar favorito para que sean nuevamente aplicadas.
 
-window.addEventListener("keydown", (e) => { 
-    eliminarAlbum(e);
- })
+window.addEventListener("keydown", (e) => {
+    
+    if (e.code === "KeyF") {
+        const albumAEliminar = prompt("Ingresa el nombre del álbum que deseas eliminar: ").toLowerCase()
+        console.log(albumAEliminar)
+        eliminarAlbum(albumAEliminar)
+    } else {
+    
+    }
+    
+
+})
 
 function eliminarAlbum(e) {
     // desarrollar la función 👇
-    
+
+
 }
 

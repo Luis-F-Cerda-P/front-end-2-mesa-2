@@ -303,3 +303,5 @@ mostrarDatosEnPerfil(albumesFamosos);
 //     const favAlbumesSpan = document.querySelector("#cant-favoritos");
 //     favAlbumesSpan.innerText = `${favAlbumes} favorito${favAlbumes > 1 ? "s" : ""}`
 // }
+
+export const albumes = albumesFamosos
