@@ -22,56 +22,56 @@
 /*               [1] FUNCION: capturar los datos del formulario               */
 /* -------------------------------------------------------------------------- */
 function capturarDatosFormulario() {
-    // Establecer un objeto vacío que contendrá los datos del form
-    // 👇🏼
-    const objetoInformacion = {
-        nombre: "",
-        password: "",
-        telefono: "",
-        hobbies: [],
-        nacionalidad: "",
+  // Establecer un objeto vacío que contendrá los datos del form
+  // 👇🏼
+  const objetoInformacion = {
+    nombre: "",
+    password: "",
+    telefono: "",
+    hobbies: [],
+    nacionalidad: "",
+  }
+
+  // Seleccionar los nodos del dom
+
+  // --------- Fieldset Datos
+  // 👇🏼
+  const nombre = document.querySelector("#nom");
+  const password = document.querySelector("#pass");
+  const telefono = document.querySelector("#tel");
+
+  // --------- Fieldset Hobbies
+  // 👇🏼
+  const hobbies = document.querySelectorAll('[name=hobbies]');
+  // console.log(hobbies);
+
+  // --------- Fieldset Nacionalidad
+  // 👇🏼
+  const nacionalidad = document.querySelectorAll("[name=nacionalidad]");
+  // console.log(nacionalidad);
+
+
+  // Almacenar la información en el objeto preparado para ello
+  // 👇🏼
+  objetoInformacion.nombre = nombre.value;
+  objetoInformacion.password = password.value;
+  objetoInformacion.telefono = telefono.value;
+
+  hobbies.forEach(function (hobbie) {
+    if (hobbie.checked) {
+      // para cada elemento, si está marcado el elemento se guarde en el array
+      objetoInformacion.hobbies.push(hobbie.id);
     }
-     
-    // Seleccionar los nodos del dom
+  })
 
-    // --------- Fieldset Datos
-    // 👇🏼
-    const nombre = document.querySelector("#nom");
-    const password = document.querySelector("#pass");
-    const telefono = document.querySelector("#tel");
-
-    // --------- Fieldset Hobbies
-    // 👇🏼
-    const hobbies = document.querySelectorAll('[name=hobbies]');
-    // console.log(hobbies);
-    
-    // --------- Fieldset Nacionalidad
-    // 👇🏼
-    const nacionalidad = document.querySelectorAll("[name=nacionalidad]");
-    // console.log(nacionalidad);
-
-
-    // Almacenar la información en el objeto preparado para ello
-    // 👇🏼
-    objetoInformacion.nombre = nombre.value;
-    objetoInformacion.password = password.value;
-    objetoInformacion.telefono = telefono.value;
-
-    hobbies.forEach(function (hobbie) {
-        if (hobbie.checked) {
-            // para cada elemento, si está marcado el elemento se guarde en el array
-            objetoInformacion.hobbies.push(hobbie.id);
-        }
-    })
-
-    nacionalidad.forEach(function (nacion) {
-        if (nacion.checked) {
-            // la iteración busca el elemento que esté marcado
-            objetoInformacion.nacionalidad = nacion.id
-        }
-    })
-    console.log(objetoInformacion);
-    return objetoInformacion;
+  nacionalidad.forEach(function (nacion) {
+    if (nacion.checked) {
+      // la iteración busca el elemento que esté marcado
+      objetoInformacion.nacionalidad = nacion.id
+    }
+  })
+  console.log(objetoInformacion);
+  return objetoInformacion;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -82,14 +82,15 @@ function capturarDatosFormulario() {
 const form = document.querySelector("form");
 
 form.addEventListener("submit", function (evento) {
-    // Evitar el comportamiento por defecto
-    evento.preventDefault();
-    // console.log(evento);
+  // Evitar el comportamiento por defecto
+  evento.preventDefault();
+  // console.log(evento);
 
-    const datos = capturarDatosFormulario();
-    const errores = validarInformacion(datos);
-    renderizarErrores(errores);
-    mostrarMensajeExito(errores);
+  const datos = capturarDatosFormulario();
+  const errores = validarInformacion(datos);
+  // errores = ["string 1 de error", "string 2 de error" ]
+  renderizarErrores(errores);
+  // mostrarMensajeExito(errores);
 })
 
 
@@ -99,7 +100,7 @@ form.addEventListener("submit", function (evento) {
 /* -------------------------------------------------------------------------- */
 /*
 Desarrollar la función validación de datos.
-Recibe un objeto con la misma estructura de obejetoInformacion
+Recibe un objeto con la misma estructura de objetoInformacion
 Debe realizar ciertas validaciones.
 Retorna un listado de errores según las comprobaciones que hace sobre el objeto:
 1. Si el nombre no es un texto y tiene menos de 3 caracteres sumar el error:
@@ -116,12 +117,43 @@ sin contar espacios al principio, en el medio o final, sumar el error:
 */
 
 
-// function validarInformacion(usuario) {
-//     let errores = [];
-//     // 👇 desarrollar aqui la funcion
+function validarInformacion(usuario) {
+  // 👇 desarrollar aqui la funcion
+  const patronNombreValido  = /^[a-zA-Z\s]{3,}$/;
+  const nombreValido = patronNombreValido.test(usuario.nombre);
+  console.log("nombreValido: ", nombreValido)
+  const patronContrasennaValida = /^[^\s]{6,50}$/;
+  const contrasennaValida = patronContrasennaValida.test(usuario.password);
+  console.log("contrasennaValida: ", contrasennaValida)
+  const patronTelefonoValido = /^[\d]{10,50}$/;
+  const telefonoValido = patronTelefonoValido.test(usuario.telefono);
+  console.log("telefonoValido: ", telefonoValido)
+  const cantidadHobbies = usuario.hobbies.length;
+  const cantidadHobbiesValida = cantidadHobbies < 5 && cantidadHobbies > 0
+  console.log("cantidadHobbiesValida: ", cantidadHobbiesValida);
+  const nacionalidadValida = usuario.nacionalidad !== '' 
+  console.log("nacionalidadValida: ", nacionalidadValida);
 
-//     return errores;
-// }
+  let errores = [];
+
+  if (!nombreValido) {
+    errores.push("El nombre debe tener al menos 3 caracteres.")
+  }
+  if (!contrasennaValida) {
+    errores.push("La contraseña debe tener al menos 6 caracteres, entre letras y símbolos.")
+  }
+  if (!telefonoValido) {
+    errores.push("No es un teléfono válido.")
+  }
+  if (!cantidadHobbiesValida) {
+    errores.push("Se debe seleccionar al menos 1 hobbie y como máximo seleccionar 4 hobbies.")
+  }
+  if (!nacionalidadValida) {
+    errores.push("Debe seleccionar una nacionalidad.")
+  }
+
+  return errores;
+}
 
 
 
@@ -129,6 +161,29 @@ sin contar espacios al principio, en el medio o final, sumar el error:
 /*                       [4] FUNCION: renderizar errores                      */
 /* -------------------------------------------------------------------------- */
 
+function renderizarErrores(errores) {
+  if (errores) {
+    const form = document.getElementsByTagName("form")[0]
+    const button = document.querySelector("button[type='submit']")
+
+    const div = document.createElement("div")
+    const ul = document.createElement("ul")
+
+    errores.forEach(error => {
+      const li = document.createElement("li")
+      li.textContent = error
+      ul.appendChild(li)
+    })
+    
+    div.appendChild(ul)
+
+    form.insertBefore(div, button)
+  
+    
+  } else {
+    return 
+  }
+}
 
 
 /* -------------------------------------------------------------------------- */
