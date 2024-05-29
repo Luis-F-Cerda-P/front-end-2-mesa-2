@@ -13,30 +13,30 @@
 /* -------------------------------------------------------------------------- */
 /*           [6] FUNCION: Escuchar el evento de carga de la página            */
 /* -------------------------------------------------------------------------- */
-window.addEventListener("load", () => { 
+window.addEventListener("load", () => {
 
-    const user = recuperarDataDelStorage();
-    renderizarElementos(user);
+  const user = recuperarDataDelStorage();
+  renderizarElementos(user);
 
-    // botonCerrarSesion();
+  botonCerrarSesion();
 
- })
+})
 
 /* -------------------------------------------------------------------------- */
 /*         [7] FUNCION: Recuperar la información del localStorage             */
 /* -------------------------------------------------------------------------- */
 function recuperarDataDelStorage() {
-    // recuperar la información almacenada en localStorage
-    const datosUsuario = localStorage.getItem("user");
-    console.log(datosUsuario);
+  // recuperar la información almacenada en localStorage
+  const datosUsuario = localStorage.getItem("user");
+  console.log(datosUsuario);
 
-    // convertir esta información para que sea legible por JS
-    const datosParseados = JSON.parse(datosUsuario);
-    console.log(datosParseados);
+  // convertir esta información para que sea legible por JS
+  const datosParseados = JSON.parse(datosUsuario);
+  console.log(datosParseados);
 
-    // const datosParseados = JSON.parse(localStorage.getItem("user"));
+  // const datosParseados = JSON.parse(localStorage.getItem("user"));
 
-    return datosParseados;
+  return datosParseados;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -44,14 +44,14 @@ function recuperarDataDelStorage() {
 /* -------------------------------------------------------------------------- */
 function renderizarElementos(objetoJS) {
 
-    console.log(objetoJS.email);
-    console.log(objetoJS.rol);
+  console.log(objetoJS.email);
+  console.log(objetoJS.rol);
 
-    const email = document.querySelector("#email");
-    const perfil = document.querySelector("#perfil");
+  const email = document.querySelector("#email");
+  const perfil = document.querySelector("#perfil");
 
-    email.textContent = objetoJS.email;
-    perfil.textContent = objetoJS.rol;
+  email.textContent = objetoJS.email;
+  perfil.textContent = objetoJS.rol;
 
 }
 
@@ -80,7 +80,27 @@ function renderizarElementos(objetoJS) {
 
 
 
-function botonCerrarSesion() { 
-//    👇 desarrollar la función aquí
+function botonCerrarSesion() {
+  //    👇 desarrollar la función aquí
+  function confirmarCierreSesion() {
+    const confirmacion = confirm("¿Seguro desea cerrar sesión?")
 
+    if (confirmacion) {
+      localStorage.clear()
+      location.replace("./")
+    }
+  }
+
+  const botonLogout = document.createElement("button")
+  botonLogout.textContent = "Cerrar sesión"
+  botonLogout.style.padding = "5px 20px"
+  botonLogout.style.backgroundColor = "rgba(255,0,0,0.2)"
+  botonLogout.style.color = "red"
+  botonLogout.style.margin = "20px"
+  botonLogout.style.border = "0"
+  botonLogout.style.cursor = "pointer"  
+  botonLogout.addEventListener('click', confirmarCierreSesion)
+
+  const tarjetaUsuario = document.querySelector(".user")
+  tarjetaUsuario.appendChild(botonLogout)
 }
