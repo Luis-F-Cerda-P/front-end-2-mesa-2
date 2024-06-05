@@ -1,7 +1,7 @@
 // Clase 12:
-    // Escuchar el clic en "Ver comentarios"
-    // Consultar la API
-    // Renderizar los comentarios
+// Escuchar el clic en "Ver comentarios"
+// Consultar la API
+// Renderizar los comentarios
 
 /*
     fetch()
@@ -23,15 +23,15 @@
 /*           [4] FUNCION: escuchar el clic en "Ver comentarios"               */
 /* -------------------------------------------------------------------------- */
 
- const boton = document.querySelector("button");
- const endpoint = 'https://jsonplaceholder.typicode.com/comments';
- 
- boton.addEventListener("click", () => { 
-     console.log("Se hizo clic para ver los comentarios");
-     consultaApi(endpoint);
-     console.log("Fin de la carga de los comentarios");
-  })
- 
+const boton = document.querySelector("button");
+const endpoint = 'https://jsonplaceholder.typicode.com/comments';
+
+boton.addEventListener("click", () => {
+  console.log("Se hizo clic para ver los comentarios");
+  consultaApi(endpoint);
+  console.log("Fin de la carga de los comentarios");
+})
+
 
 
 
@@ -47,19 +47,22 @@
 // Implementar el endpoint que devuelve comentarios para mostrarlos en pantalla.
 
 function consultaApi(endpoint) {
-    fetch(endpoint)
-        .then( objetoRespuesta => {
-            console.log(objetoRespuesta);
-            console.log(objetoRespuesta.status);
-            console.log(objetoRespuesta.url);
 
-            return objetoRespuesta.json();
-        })
-        .then( datosJs => {
-            console.log(datosJs);
-            renderizarElementos(datosJs);
-        })
-        .catch( error => console.log(error));
+  fetch(endpoint)
+    .then(objetoRespuesta => {
+      // console.log(objetoRespuesta);
+      // console.log(objetoRespuesta.status);
+      // console.log(objetoRespuesta.url);
+      if (!objetoRespuesta.ok) throw new Error("Algo salió mal!")
+
+      return objetoRespuesta.json();
+    })
+    .then(datosJs => {
+      // console.log(datosJs);
+      renderizarElementos(datosJs);
+    })
+    .catch(error => console.log(error))
+    
 }
 
 /*
@@ -78,18 +81,20 @@ En este caso:
 /*                      [6] FUNCION: renderizar elementos                     */
 /* -------------------------------------------------------------------------- */
 
-function renderizarElementos(listado) {
-    const comentarios = document.querySelector(".comentarios");
-    
-    comentarios.innerHTML = ""
-    listado.forEach(comentario => {
-        comentarios.innerHTML += `
+function renderizarElementos(listado, cuantosRenderizar = 10) {
+  const comentarios = document.querySelector(".comentarios");
+  const botonVer = document.querySelector(".mostrar button");
+  botonVer.remove()
+
+  comentarios.innerHTML = ""
+  listado.slice(0, cuantosRenderizar).forEach(comentario => {
+    comentarios.innerHTML += `
             <div class="comentario" data-id="${comentario.id}">
                 <h4>${comentario.email}</h4>
                 <p>${comentario.body}</p>
             </div>
         `
-    });
+  });
 }
 
 
